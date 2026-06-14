@@ -14,14 +14,12 @@
 // ─────────────────────────────────────────────────────────────
 
 /**
- * สีพื้นถัง (CSS variable) ตาม % ที่เต็ม
- * @param {number} pct  0-100
+ * สีตัวเลข fill % — ใช้ neutral เพราะสีถังแสดง temp อยู่แล้ว
+ * @param {number} pct  0-100 (parameter ยังรับไว้เพื่อ backward compat)
  * @returns {string}    CSS var string
  */
 function fillColor(pct) {
-  if (pct >= CONFIG.FILL_FULL_PCT) return 'var(--red)';
-  if (pct >= CONFIG.FILL_MID_PCT)  return 'var(--yellow)';
-  return 'var(--green)';
+  return 'var(--text2)';
 }
 
 /**
