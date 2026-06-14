@@ -1,0 +1,121 @@
+﻿Label Name,Data Type,Array Setting,Class,Assign (Device/Label),Initial Value,Constant,Comment
+Silo_S01_Temp_Raw,INT,,VAR_GLOBAL,D100,,,Temp raw ×10 ถัง S01 (เช่น 275=27.5°C)
+Silo_S01_CO2_Raw,INT,,VAR_GLOBAL,D200,,,CO₂ ppm ถัง S01
+Silo_S01_Moist_Raw,INT,,VAR_GLOBAL,D300,,,Moisture raw ×10 ถัง S01 (เช่น 142=14.2%)
+Silo_S01_Fan,INT,,VAR_GLOBAL,D400,,,"Fan status ถัง S01 (0=ปิด, 1=เปิด)"
+Silo_S01_Fault,INT,,VAR_GLOBAL,D500,,,"Sensor fault ถัง S01 (0=OK, 1=Fault)"
+Silo_S02_Temp_Raw,INT,,VAR_GLOBAL,D101,,,Temp raw ×10 ถัง S02 (เช่น 275=27.5°C)
+Silo_S02_CO2_Raw,INT,,VAR_GLOBAL,D201,,,CO₂ ppm ถัง S02
+Silo_S02_Moist_Raw,INT,,VAR_GLOBAL,D301,,,Moisture raw ×10 ถัง S02 (เช่น 142=14.2%)
+Silo_S02_Fan,INT,,VAR_GLOBAL,D401,,,"Fan status ถัง S02 (0=ปิด, 1=เปิด)"
+Silo_S02_Fault,INT,,VAR_GLOBAL,D501,,,"Sensor fault ถัง S02 (0=OK, 1=Fault)"
+Silo_S03_Temp_Raw,INT,,VAR_GLOBAL,D102,,,Temp raw ×10 ถัง S03 (เช่น 275=27.5°C)
+Silo_S03_CO2_Raw,INT,,VAR_GLOBAL,D202,,,CO₂ ppm ถัง S03
+Silo_S03_Moist_Raw,INT,,VAR_GLOBAL,D302,,,Moisture raw ×10 ถัง S03 (เช่น 142=14.2%)
+Silo_S03_Fan,INT,,VAR_GLOBAL,D402,,,"Fan status ถัง S03 (0=ปิด, 1=เปิด)"
+Silo_S03_Fault,INT,,VAR_GLOBAL,D502,,,"Sensor fault ถัง S03 (0=OK, 1=Fault)"
+Silo_S04_Temp_Raw,INT,,VAR_GLOBAL,D103,,,Temp raw ×10 ถัง S04 (เช่น 275=27.5°C)
+Silo_S04_CO2_Raw,INT,,VAR_GLOBAL,D203,,,CO₂ ppm ถัง S04
+Silo_S04_Moist_Raw,INT,,VAR_GLOBAL,D303,,,Moisture raw ×10 ถัง S04 (เช่น 142=14.2%)
+Silo_S04_Fan,INT,,VAR_GLOBAL,D403,,,"Fan status ถัง S04 (0=ปิด, 1=เปิด)"
+Silo_S04_Fault,INT,,VAR_GLOBAL,D503,,,"Sensor fault ถัง S04 (0=OK, 1=Fault)"
+Silo_S05_Temp_Raw,INT,,VAR_GLOBAL,D104,,,Temp raw ×10 ถัง S05 (เช่น 275=27.5°C)
+Silo_S05_CO2_Raw,INT,,VAR_GLOBAL,D204,,,CO₂ ppm ถัง S05
+Silo_S05_Moist_Raw,INT,,VAR_GLOBAL,D304,,,Moisture raw ×10 ถัง S05 (เช่น 142=14.2%)
+Silo_S05_Fan,INT,,VAR_GLOBAL,D404,,,"Fan status ถัง S05 (0=ปิด, 1=เปิด)"
+Silo_S05_Fault,INT,,VAR_GLOBAL,D504,,,"Sensor fault ถัง S05 (0=OK, 1=Fault)"
+Silo_S06_Temp_Raw,INT,,VAR_GLOBAL,D105,,,Temp raw ×10 ถัง S06 (เช่น 275=27.5°C)
+Silo_S06_CO2_Raw,INT,,VAR_GLOBAL,D205,,,CO₂ ppm ถัง S06
+Silo_S06_Moist_Raw,INT,,VAR_GLOBAL,D305,,,Moisture raw ×10 ถัง S06 (เช่น 142=14.2%)
+Silo_S06_Fan,INT,,VAR_GLOBAL,D405,,,"Fan status ถัง S06 (0=ปิด, 1=เปิด)"
+Silo_S06_Fault,INT,,VAR_GLOBAL,D505,,,"Sensor fault ถัง S06 (0=OK, 1=Fault)"
+Silo_S07_Temp_Raw,INT,,VAR_GLOBAL,D106,,,Temp raw ×10 ถัง S07 (เช่น 275=27.5°C)
+Silo_S07_CO2_Raw,INT,,VAR_GLOBAL,D206,,,CO₂ ppm ถัง S07
+Silo_S07_Moist_Raw,INT,,VAR_GLOBAL,D306,,,Moisture raw ×10 ถัง S07 (เช่น 142=14.2%)
+Silo_S07_Fan,INT,,VAR_GLOBAL,D406,,,"Fan status ถัง S07 (0=ปิด, 1=เปิด)"
+Silo_S07_Fault,INT,,VAR_GLOBAL,D506,,,"Sensor fault ถัง S07 (0=OK, 1=Fault)"
+Silo_S08_Temp_Raw,INT,,VAR_GLOBAL,D107,,,Temp raw ×10 ถัง S08 (เช่น 275=27.5°C)
+Silo_S08_CO2_Raw,INT,,VAR_GLOBAL,D207,,,CO₂ ppm ถัง S08
+Silo_S08_Moist_Raw,INT,,VAR_GLOBAL,D307,,,Moisture raw ×10 ถัง S08 (เช่น 142=14.2%)
+Silo_S08_Fan,INT,,VAR_GLOBAL,D407,,,"Fan status ถัง S08 (0=ปิด, 1=เปิด)"
+Silo_S08_Fault,INT,,VAR_GLOBAL,D507,,,"Sensor fault ถัง S08 (0=OK, 1=Fault)"
+Silo_S09_Temp_Raw,INT,,VAR_GLOBAL,D108,,,Temp raw ×10 ถัง S09 (เช่น 275=27.5°C)
+Silo_S09_CO2_Raw,INT,,VAR_GLOBAL,D208,,,CO₂ ppm ถัง S09
+Silo_S09_Moist_Raw,INT,,VAR_GLOBAL,D308,,,Moisture raw ×10 ถัง S09 (เช่น 142=14.2%)
+Silo_S09_Fan,INT,,VAR_GLOBAL,D408,,,"Fan status ถัง S09 (0=ปิด, 1=เปิด)"
+Silo_S09_Fault,INT,,VAR_GLOBAL,D508,,,"Sensor fault ถัง S09 (0=OK, 1=Fault)"
+Silo_S10_Temp_Raw,INT,,VAR_GLOBAL,D109,,,Temp raw ×10 ถัง S10 (เช่น 275=27.5°C)
+Silo_S10_CO2_Raw,INT,,VAR_GLOBAL,D209,,,CO₂ ppm ถัง S10
+Silo_S10_Moist_Raw,INT,,VAR_GLOBAL,D309,,,Moisture raw ×10 ถัง S10 (เช่น 142=14.2%)
+Silo_S10_Fan,INT,,VAR_GLOBAL,D409,,,"Fan status ถัง S10 (0=ปิด, 1=เปิด)"
+Silo_S10_Fault,INT,,VAR_GLOBAL,D509,,,"Sensor fault ถัง S10 (0=OK, 1=Fault)"
+Silo_S11_Temp_Raw,INT,,VAR_GLOBAL,D110,,,Temp raw ×10 ถัง S11 (เช่น 275=27.5°C)
+Silo_S11_CO2_Raw,INT,,VAR_GLOBAL,D210,,,CO₂ ppm ถัง S11
+Silo_S11_Moist_Raw,INT,,VAR_GLOBAL,D310,,,Moisture raw ×10 ถัง S11 (เช่น 142=14.2%)
+Silo_S11_Fan,INT,,VAR_GLOBAL,D410,,,"Fan status ถัง S11 (0=ปิด, 1=เปิด)"
+Silo_S11_Fault,INT,,VAR_GLOBAL,D510,,,"Sensor fault ถัง S11 (0=OK, 1=Fault)"
+Silo_S12_Temp_Raw,INT,,VAR_GLOBAL,D111,,,Temp raw ×10 ถัง S12 (เช่น 275=27.5°C)
+Silo_S12_CO2_Raw,INT,,VAR_GLOBAL,D211,,,CO₂ ppm ถัง S12
+Silo_S12_Moist_Raw,INT,,VAR_GLOBAL,D311,,,Moisture raw ×10 ถัง S12 (เช่น 142=14.2%)
+Silo_S12_Fan,INT,,VAR_GLOBAL,D411,,,"Fan status ถัง S12 (0=ปิด, 1=เปิด)"
+Silo_S12_Fault,INT,,VAR_GLOBAL,D511,,,"Sensor fault ถัง S12 (0=OK, 1=Fault)"
+Silo_R01_Temp_Raw,INT,,VAR_GLOBAL,D112,,,Temp raw ×10 ถัง R01 (เช่น 275=27.5°C)
+Silo_R01_CO2_Raw,INT,,VAR_GLOBAL,D212,,,CO₂ ppm ถัง R01
+Silo_R01_Moist_Raw,INT,,VAR_GLOBAL,D312,,,Moisture raw ×10 ถัง R01 (เช่น 142=14.2%)
+Silo_R01_Fan,INT,,VAR_GLOBAL,D412,,,"Fan status ถัง R01 (0=ปิด, 1=เปิด)"
+Silo_R01_Fault,INT,,VAR_GLOBAL,D512,,,"Sensor fault ถัง R01 (0=OK, 1=Fault)"
+Silo_R02_Temp_Raw,INT,,VAR_GLOBAL,D113,,,Temp raw ×10 ถัง R02 (เช่น 275=27.5°C)
+Silo_R02_CO2_Raw,INT,,VAR_GLOBAL,D213,,,CO₂ ppm ถัง R02
+Silo_R02_Moist_Raw,INT,,VAR_GLOBAL,D313,,,Moisture raw ×10 ถัง R02 (เช่น 142=14.2%)
+Silo_R02_Fan,INT,,VAR_GLOBAL,D413,,,"Fan status ถัง R02 (0=ปิด, 1=เปิด)"
+Silo_R02_Fault,INT,,VAR_GLOBAL,D513,,,"Sensor fault ถัง R02 (0=OK, 1=Fault)"
+Silo_R03_Temp_Raw,INT,,VAR_GLOBAL,D114,,,Temp raw ×10 ถัง R03 (เช่น 275=27.5°C)
+Silo_R03_CO2_Raw,INT,,VAR_GLOBAL,D214,,,CO₂ ppm ถัง R03
+Silo_R03_Moist_Raw,INT,,VAR_GLOBAL,D314,,,Moisture raw ×10 ถัง R03 (เช่น 142=14.2%)
+Silo_R03_Fan,INT,,VAR_GLOBAL,D414,,,"Fan status ถัง R03 (0=ปิด, 1=เปิด)"
+Silo_R03_Fault,INT,,VAR_GLOBAL,D514,,,"Sensor fault ถัง R03 (0=OK, 1=Fault)"
+Silo_R04_Temp_Raw,INT,,VAR_GLOBAL,D115,,,Temp raw ×10 ถัง R04 (เช่น 275=27.5°C)
+Silo_R04_CO2_Raw,INT,,VAR_GLOBAL,D215,,,CO₂ ppm ถัง R04
+Silo_R04_Moist_Raw,INT,,VAR_GLOBAL,D315,,,Moisture raw ×10 ถัง R04 (เช่น 142=14.2%)
+Silo_R04_Fan,INT,,VAR_GLOBAL,D415,,,"Fan status ถัง R04 (0=ปิด, 1=เปิด)"
+Silo_R04_Fault,INT,,VAR_GLOBAL,D515,,,"Sensor fault ถัง R04 (0=OK, 1=Fault)"
+Silo_R05_Temp_Raw,INT,,VAR_GLOBAL,D116,,,Temp raw ×10 ถัง R05 (เช่น 275=27.5°C)
+Silo_R05_CO2_Raw,INT,,VAR_GLOBAL,D216,,,CO₂ ppm ถัง R05
+Silo_R05_Moist_Raw,INT,,VAR_GLOBAL,D316,,,Moisture raw ×10 ถัง R05 (เช่น 142=14.2%)
+Silo_R05_Fan,INT,,VAR_GLOBAL,D416,,,"Fan status ถัง R05 (0=ปิด, 1=เปิด)"
+Silo_R05_Fault,INT,,VAR_GLOBAL,D516,,,"Sensor fault ถัง R05 (0=OK, 1=Fault)"
+Silo_R06_Temp_Raw,INT,,VAR_GLOBAL,D117,,,Temp raw ×10 ถัง R06 (เช่น 275=27.5°C)
+Silo_R06_CO2_Raw,INT,,VAR_GLOBAL,D217,,,CO₂ ppm ถัง R06
+Silo_R06_Moist_Raw,INT,,VAR_GLOBAL,D317,,,Moisture raw ×10 ถัง R06 (เช่น 142=14.2%)
+Silo_R06_Fan,INT,,VAR_GLOBAL,D417,,,"Fan status ถัง R06 (0=ปิด, 1=เปิด)"
+Silo_R06_Fault,INT,,VAR_GLOBAL,D517,,,"Sensor fault ถัง R06 (0=OK, 1=Fault)"
+Silo_R07_Temp_Raw,INT,,VAR_GLOBAL,D118,,,Temp raw ×10 ถัง R07 (เช่น 275=27.5°C)
+Silo_R07_CO2_Raw,INT,,VAR_GLOBAL,D218,,,CO₂ ppm ถัง R07
+Silo_R07_Moist_Raw,INT,,VAR_GLOBAL,D318,,,Moisture raw ×10 ถัง R07 (เช่น 142=14.2%)
+Silo_R07_Fan,INT,,VAR_GLOBAL,D418,,,"Fan status ถัง R07 (0=ปิด, 1=เปิด)"
+Silo_R07_Fault,INT,,VAR_GLOBAL,D518,,,"Sensor fault ถัง R07 (0=OK, 1=Fault)"
+Silo_R08_Temp_Raw,INT,,VAR_GLOBAL,D119,,,Temp raw ×10 ถัง R08 (เช่น 275=27.5°C)
+Silo_R08_CO2_Raw,INT,,VAR_GLOBAL,D219,,,CO₂ ppm ถัง R08
+Silo_R08_Moist_Raw,INT,,VAR_GLOBAL,D319,,,Moisture raw ×10 ถัง R08 (เช่น 142=14.2%)
+Silo_R08_Fan,INT,,VAR_GLOBAL,D419,,,"Fan status ถัง R08 (0=ปิด, 1=เปิด)"
+Silo_R08_Fault,INT,,VAR_GLOBAL,D519,,,"Sensor fault ถัง R08 (0=OK, 1=Fault)"
+ADC_CH01_Raw,INT,,VAR_GLOBAL,D600,,,Analog raw input CH1 จาก FX5-4AD (0–4000)
+ADC_CH02_Raw,INT,,VAR_GLOBAL,D601,,,Analog raw input CH2 จาก FX5-4AD (0–4000)
+ADC_CH03_Raw,INT,,VAR_GLOBAL,D602,,,Analog raw input CH3 จาก FX5-4AD (0–4000)
+ADC_CH04_Raw,INT,,VAR_GLOBAL,D603,,,Analog raw input CH4 จาก FX5-4AD (0–4000)
+ADC_CH05_Raw,INT,,VAR_GLOBAL,D604,,,Analog raw input CH5 จาก FX5-4AD (0–4000)
+ADC_CH06_Raw,INT,,VAR_GLOBAL,D605,,,Analog raw input CH6 จาก FX5-4AD (0–4000)
+ADC_CH07_Raw,INT,,VAR_GLOBAL,D606,,,Analog raw input CH7 จาก FX5-4AD (0–4000)
+ADC_CH08_Raw,INT,,VAR_GLOBAL,D607,,,Analog raw input CH8 จาก FX5-4AD (0–4000)
+ADC_CH09_Raw,INT,,VAR_GLOBAL,D608,,,Analog raw input CH9 จาก FX5-4AD (0–4000)
+ADC_CH10_Raw,INT,,VAR_GLOBAL,D609,,,Analog raw input CH10 จาก FX5-4AD (0–4000)
+ADC_CH11_Raw,INT,,VAR_GLOBAL,D610,,,Analog raw input CH11 จาก FX5-4AD (0–4000)
+ADC_CH12_Raw,INT,,VAR_GLOBAL,D611,,,Analog raw input CH12 จาก FX5-4AD (0–4000)
+ADC_CH13_Raw,INT,,VAR_GLOBAL,D612,,,Analog raw input CH13 จาก FX5-4AD (0–4000)
+ADC_CH14_Raw,INT,,VAR_GLOBAL,D613,,,Analog raw input CH14 จาก FX5-4AD (0–4000)
+ADC_CH15_Raw,INT,,VAR_GLOBAL,D614,,,Analog raw input CH15 จาก FX5-4AD (0–4000)
+ADC_CH16_Raw,INT,,VAR_GLOBAL,D615,,,Analog raw input CH16 จาก FX5-4AD (0–4000)
+ADC_CH17_Raw,INT,,VAR_GLOBAL,D616,,,Analog raw input CH17 จาก FX5-4AD (0–4000)
+ADC_CH18_Raw,INT,,VAR_GLOBAL,D617,,,Analog raw input CH18 จาก FX5-4AD (0–4000)
+ADC_CH19_Raw,INT,,VAR_GLOBAL,D618,,,Analog raw input CH19 จาก FX5-4AD (0–4000)
+ADC_CH20_Raw,INT,,VAR_GLOBAL,D619,,,Analog raw input CH20 จาก FX5-4AD (0–4000)

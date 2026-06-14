@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kid-D Tech — Silo Command</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#030C17;--bg1:#071525;--bg2:#0A1E30;--bg3:#0F2640;
+  --teal:#00BFA5;--teal2:#00DFC8;--teal3:#80EDE5;
+  --border:rgba(0,191,165,.14);--bhl:rgba(0,191,165,.52);--dim:rgba(0,191,165,.07);
+  --panel:rgba(3,10,20,.97);
+  --amber:#F59E0B;--amber2:#FCD34D;--orange:#FB923C;
+  --red:#EF4444;--red2:#FC8181;--green:#10B981;--green2:#34D399;--blue:#0EA5E9;
+  --text:#C8DDE8;--text2:#6E8FA8;--text3:#3A5C73;
+  --font:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace;
+}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--font)}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(0,191,165,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,191,165,.025) 1px,transparent 1px);
+  background-size:52px 52px;
+}
+*{position:relative;z-index:1}
+
+/* TOPBAR */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:48px;z-index:200;
+  display:flex;align-items:center;padding:0 18px;gap:18px;
+  background:rgba(2,8,18,.99);border-bottom:1px solid var(--border);
+}
+.logo{display:flex;align-items:center;gap:8px;user-select:none}
+.logo-mark{
+  width:28px;height:28px;border-radius:6px;flex-shrink:0;
+  background:linear-gradient(140deg,#007A6E,#00BFA5 70%,#00DFC8);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:800;color:#fff;letter-spacing:0;
+}
+.logo-name{font-size:11px;font-weight:700;letter-spacing:4px;color:var(--teal);text-transform:uppercase}
+.logo-divider{width:1px;height:18px;background:var(--border);flex-shrink:0}
+.logo-sub{font-size:10px;color:var(--text3);font-family:var(--mono);letter-spacing:.5px}
+.nav{display:flex;gap:1px}
+.nav-item{padding:5px 11px;border-radius:4px;font-size:11px;font-weight:500;cursor:pointer;color:var(--text3);transition:all .14s;border:1px solid transparent;user-select:none}
+.nav-item:hover{color:var(--text2);background:var(--dim)}
+.nav-item.on{color:var(--teal2);background:rgba(0,191,165,.1);border-color:rgba(0,191,165,.25)}
+.topbar-r{display:flex;align-items:center;gap:8px;margin-left:auto}
+.site-chip{font-size:9px;font-family:var(--mono);color:var(--text3);letter-spacing:1.5px;padding:3px 8px;border:1px solid var(--border);border-radius:3px;background:var(--bg2);text-transform:uppercase}
+.icon-btn{width:30px;height:30px;border-radius:5px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;background:var(--dim);position:relative;transition:all .14s}
+.icon-btn:hover{border-color:var(--bhl);background:rgba(0,191,165,.1)}
+.nb{position:absolute;top:-4px;right:-4px;width:14px;height:14px;border-radius:50%;background:var(--red);font-size:8px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;animation:rp 2s infinite}
+@keyframes rp{0%,100%{box-shadow:0 0 4px rgba(239,68,68,.5)}50%{box-shadow:0 0 12px rgba(239,68,68,.85)}}
+.user-pill{display:flex;align-items:center;gap:6px;padding:3px 10px 3px 5px;border-radius:20px;border:1px solid var(--border);background:var(--dim);cursor:pointer}
+.user-av{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--teal),#006EBF);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff}
+.user-n{font-size:11px;font-weight:500;color:var(--text2)}
+
+/* LAYOUT */
+.layout{position:fixed;top:48px;bottom:30px;left:0;right:0;display:grid;grid-template-columns:195px 1fr 315px;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{border-right:1px solid var(--border);background:var(--panel);display:flex;flex-direction:column;overflow:hidden}
+.sb-hd{padding:12px 13px 10px;border-bottom:1px solid var(--border);flex-shrink:0}
+.sb-lbl{font-size:8px;text-transform:uppercase;letter-spacing:2.5px;color:var(--text3);margin-bottom:8px}
+.fstat-row{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.fstat{text-align:center;padding:7px;background:var(--bg2);border:1px solid var(--border);border-radius:5px}
+.fstat-n{font-size:18px;font-weight:700;font-family:var(--mono);line-height:1}
+.fstat-l{font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-top:2px}
+.sb-list{flex:1;overflow-y:auto;padding:6px}
+.sb-list::-webkit-scrollbar{width:3px}
+.sb-list::-webkit-scrollbar-thumb{background:rgba(0,191,165,.18);border-radius:2px}
+.sl-row{display:flex;align-items:center;gap:7px;padding:5px 8px;border-radius:5px;cursor:pointer;margin-bottom:1px;transition:all .12s;border:1px solid transparent}
+.sl-row:hover{background:var(--dim);border-color:var(--border)}
+.sl-row.on{background:rgba(0,191,165,.08);border-color:rgba(0,191,165,.32)}
+.sl-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sl-dot.ok{background:var(--green)}
+.sl-dot.warn{background:var(--amber);animation:blk 1.3s infinite}
+.sl-dot.crit{background:var(--red);animation:blk .7s infinite}
+@keyframes blk{0%,100%{opacity:1}50%{opacity:.15}}
+.sl-id{font-size:11px;font-weight:600;font-family:var(--mono);flex:1;color:var(--text)}
+.sl-temp{font-size:10px;font-family:var(--mono)}
+.sl-co2{font-size:8px;font-family:var(--mono);color:var(--text3);margin-left:2px}
+
+/* MAIN */
+.main{display:flex;flex-direction:column;overflow:hidden}
+
+/* KPI strip — no card backgrounds, just numbers */
+.kpi-strip{
+  height:62px;flex-shrink:0;
+  display:flex;align-items:stretch;
+  border-bottom:1px solid var(--border);
+  background:rgba(2,8,18,.7);
+}
+.kpi-item{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 18px;border-right:1px solid var(--border);
+  cursor:default;transition:background .14s;min-width:0;flex:1;
+}
+.kpi-item:last-child{border-right:none;margin-left:auto;flex:unset;min-width:160px;border-left:1px solid var(--border)}
+.kpi-item:hover{background:rgba(0,191,165,.04)}
+.kpi-n{font-size:22px;font-weight:700;font-family:var(--mono);line-height:1}
+.kpi-l{font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--text3);margin-top:3px}
+.live-row{display:flex;align-items:center;gap:6px;padding:0 14px}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blk 2s infinite}
+.live-txt{font-size:9px;font-family:var(--mono);color:var(--text3)}
+.temp-scale{display:flex;flex-direction:column;justify-content:center;height:100%}
+.scale-title{font-size:7px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:4px}
+.scale-row{display:flex;gap:3px;align-items:center}
+.sc-pip{display:flex;align-items:center;gap:2px;font-size:7px;font-family:var(--mono);color:var(--text3)}
+.pip-sq{width:9px;height:9px;border-radius:2px}
+
+/* FARM AREA */
+.farm-scroll{flex:1;overflow-y:auto;padding:11px;display:flex;flex-direction:column;gap:0}
+.farm-scroll::-webkit-scrollbar{width:3px}
+.farm-scroll::-webkit-scrollbar-thumb{background:rgba(0,191,165,.18);border-radius:2px}
+.silo-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;align-content:start}
+
+/* SILO CARD */
+.sc{
+  border:1px solid var(--border);border-radius:7px;
+  background:rgba(4,12,22,.82);
+  padding:8px 7px 7px;cursor:pointer;
+  transition:all .18s;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  backdrop-filter:blur(6px);overflow:hidden;
+}
+.sc:hover{border-color:var(--bhl);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.sc.sel{border-color:var(--teal);box-shadow:0 0 0 1px rgba(0,191,165,.25),0 6px 20px rgba(0,0,0,.4);background:rgba(0,191,165,.04)}
+.sc.crit{border-color:rgba(239,68,68,.65);animation:cg 2s infinite}
+.sc.warn{border-color:rgba(245,158,11,.52)}
+@keyframes cg{0%,100%{box-shadow:0 0 8px rgba(239,68,68,.15)}50%{box-shadow:0 0 22px rgba(239,68,68,.5)}}
+.sc-top{width:100%;display:flex;justify-content:space-between;align-items:center}
+.sc-id{font-size:9px;font-weight:700;font-family:var(--mono);letter-spacing:1.5px}
+.sc-id.ok{color:var(--teal)}
+.sc-id.warn{color:var(--amber)}
+.sc-id.crit{color:var(--red2)}
+.sc-tag{font-size:7px;font-weight:700;padding:1px 5px;border-radius:2px;letter-spacing:.8px;text-transform:uppercase}
+.sc-tag.crit{background:rgba(239,68,68,.18);color:var(--red2);border:1px solid rgba(239,68,68,.38)}
+.sc-tag.warn{background:rgba(245,158,11,.14);color:var(--amber);border:1px solid rgba(245,158,11,.32)}
+.sc-svg{display:flex;justify-content:center}
+.sc-row{width:100%;display:flex;justify-content:space-between;align-items:baseline}
+.sc-v{font-size:9px;font-weight:600;font-family:var(--mono)}
+.sc-k{font-size:7px;color:var(--text3);font-family:var(--mono)}
+
+/* DETAIL PANEL */
+.detail{border-left:1px solid var(--border);background:var(--panel);display:flex;flex-direction:column;overflow:hidden}
+.det-hd{padding:11px 14px;border-bottom:1px solid var(--border);flex-shrink:0}
+.det-hd-top{display:flex;align-items:center;gap:10px;margin-bottom:5px}
+.det-sid{font-size:15px;font-weight:700;font-family:var(--mono);color:var(--teal2)}
+.det-desc{font-size:10px;color:var(--text3)}
+.sensor-chips{display:flex;gap:6px;flex-wrap:wrap}
+.s-chip{display:flex;align-items:center;gap:3px;padding:2px 7px;border-radius:3px;font-size:9px;font-family:var(--mono);border:1px solid var(--border);background:var(--bg2)}
+.s-pip{width:5px;height:5px;border-radius:50%}
+.det-body{flex:1;overflow-y:auto}
+.det-body::-webkit-scrollbar{width:3px}
+.det-body::-webkit-scrollbar-thumb{background:rgba(0,191,165,.18);border-radius:2px}
+.det-sec{padding:12px 14px;border-bottom:1px solid var(--border)}
+.det-sec-lbl{font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--teal);margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.det-sec-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
+.chart-box{height:120px;position:relative}
+.dm-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-top:8px}
+.dm{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:7px;text-align:center}
+.dm-l{font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:2px}
+.dm-v{font-size:13px;font-weight:700;font-family:var(--mono)}
+.ai-row{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ai-row:last-child{border-bottom:none}
+.ai-lbl{width:30px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;font-family:var(--mono);flex-shrink:0}
+.ai-lbl.r{background:rgba(239,68,68,.1);color:var(--red2);border:1px solid rgba(239,68,68,.22)}
+.ai-lbl.a{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.22)}
+.ai-lbl.t{background:rgba(0,191,165,.09);color:var(--teal2);border:1px solid rgba(0,191,165,.2)}
+.ai-inf{flex:1;min-width:0}
+.ai-t{font-size:10px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ai-s{font-size:9px;color:var(--text3);margin-top:1px}
+.ai-sc{font-size:12px;font-weight:700;font-family:var(--mono);flex-shrink:0}
+.alert-r{padding:7px 8px;margin-bottom:5px;border-radius:0 5px 5px 0;display:flex;align-items:flex-start;gap:7px}
+.alert-r:last-child{margin-bottom:0}
+.alert-r.crit{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);border-left:2px solid var(--red)}
+.alert-r.warn{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.16);border-left:2px solid var(--amber)}
+.alert-ico{font-size:12px;flex-shrink:0;margin-top:1px}
+.alert-t{font-size:10px;color:var(--text2);line-height:1.4}
+.alert-m{font-size:8px;color:var(--text3);font-family:var(--mono);margin-top:2px}
+
+/* STATUSBAR */
+.statusbar{
+  position:fixed;bottom:0;left:0;right:0;height:30px;z-index:200;
+  background:rgba(2,8,18,.99);border-top:1px solid var(--border);
+  display:flex;align-items:center;padding:0 14px;gap:14px;
+  font-size:9px;font-family:var(--mono);color:var(--text3);
+}
+.sb{display:flex;align-items:center;gap:5px}
+.sdot{width:4px;height:4px;border-radius:50%}
+.sdot.live{background:var(--green);animation:blk 2.2s infinite}
+.sdot.al{background:var(--red);animation:blk 1s infinite}
+.sb-div{width:1px;height:12px;background:var(--border)}
+.sb-r{margin-left:auto;color:var(--text2);font-size:10px;letter-spacing:1px}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">
+    <div class="logo-mark">KD</div>
+    <span class="logo-name">Kid-D Tech</span>
+    <span class="logo-divider"></span>
+    <span class="logo-sub">Silo Command v2.4</span>
+  </div>
+  <nav class="nav">
+    <div class="nav-item on">Dashboard</div>
+    <div class="nav-item">Fan Control</div>
+    <div class="nav-item">Predictive AI</div>
+    <div class="nav-item">Reports</div>
+    <div class="nav-item">Fumigation</div>
+  </nav>
+  <div class="topbar-r">
+    <span class="site-chip">Feedmill-01</span>
+    <div class="icon-btn">🔔<span class="nb">3</span></div>
+    <div class="user-pill"><div class="user-av">KW</div><span class="user-n">Kwan</span></div>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-hd">
+      <div class="sb-lbl">Farm Status</div>
+      <div class="fstat-row">
+        <div class="fstat"><div class="fstat-n" style="color:var(--green2)" id="cntOk">17</div><div class="fstat-l">Normal</div></div>
+        <div class="fstat"><div class="fstat-n" style="color:var(--red2)" id="cntAl">3</div><div class="fstat-l">Alert</div></div>
+      </div>
+    </div>
+    <div class="sb-list" id="siloList"></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="kpi-strip">
+      <div class="kpi-item">
+        <div class="kpi-n" style="color:var(--green2)" id="kN">17/20</div>
+        <div class="kpi-l">Normal Silos</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-n" style="color:var(--red2)" id="kA">3</div>
+        <div class="kpi-l">Active Alerts</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-n" style="color:var(--teal3)" id="kT">28.1°C</div>
+        <div class="kpi-l">Avg Temperature</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-n" style="color:var(--amber2)" id="kC">487</div>
+        <div class="kpi-l">Avg CO₂ (ppm)</div>
+      </div>
+      <div class="kpi-item" style="flex:unset;min-width:180px;border-left:1px solid var(--border);border-right:none">
+        <div class="live-row"><span class="live-dot"></span><span class="live-txt">LIVE · 3s refresh</span></div>
+        <div class="temp-scale" style="margin-top:5px">
+          <div class="scale-title">Temp Scale</div>
+          <div class="scale-row">
+            <div class="sc-pip"><div class="pip-sq" style="background:#0EA5E9"></div>&lt;26</div>
+            <div class="sc-pip" style="margin-left:4px"><div class="pip-sq" style="background:#00BFA5"></div>28</div>
+            <div class="sc-pip" style="margin-left:4px"><div class="pip-sq" style="background:#F59E0B"></div>30</div>
+            <div class="sc-pip" style="margin-left:4px"><div class="pip-sq" style="background:#FB923C"></div>32</div>
+            <div class="sc-pip" style="margin-left:4px"><div class="pip-sq" style="background:#EF4444"></div>32+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="farm-scroll">
+      <div class="silo-grid" id="siloGrid"></div>
+    </div>
+  </main>
+
+  <!-- DETAIL -->
+  <aside class="detail">
+    <div class="det-hd">
+      <div class="det-hd-top">
+        <span class="det-sid" id="detId">S03</span>
+        <span class="det-desc" id="detDesc">CRITICAL — Temp 34.0°C, CO₂ 1,650 ppm</span>
+      </div>
+      <div class="sensor-chips" id="sensorChips"></div>
+    </div>
+    <div class="det-body">
+      <div class="det-sec">
+        <div class="det-sec-lbl" id="chartLbl">Temperature — 24 h Trend</div>
+        <div class="chart-box"><canvas id="trendChart"></canvas></div>
+        <div class="dm-row">
+          <div class="dm"><div class="dm-l">Top Sensor</div><div class="dm-v" id="dmT">34.0°C</div></div>
+          <div class="dm"><div class="dm-l">CO₂</div><div class="dm-v" id="dmC">1,650</div></div>
+          <div class="dm"><div class="dm-l">Moisture</div><div class="dm-v" id="dmM">15.8%</div></div>
+        </div>
+      </div>
+      <div class="det-sec">
+        <div class="det-sec-lbl">AI Predictions</div>
+        <div class="ai-row"><div class="ai-lbl r">CO₂</div><div class="ai-inf"><div class="ai-t">S03 · CO₂ Forecast</div><div class="ai-s">Exceeds 2,000 ppm in ~4 hrs</div></div><div class="ai-sc" style="color:var(--red2)">87%</div></div>
+        <div class="ai-row"><div class="ai-lbl r">AFL</div><div class="ai-inf"><div class="ai-t">Aflatoxin Risk · S03</div><div class="ai-s">Risk score: 78/100 — Act now</div></div><div class="ai-sc" style="color:var(--red2)">78</div></div>
+        <div class="ai-row"><div class="ai-lbl a">HOT</div><div class="ai-inf"><div class="ai-t">Hot Spot · S07</div><div class="ai-s">Unusual temp gradient detected</div></div><div class="ai-sc" style="color:var(--amber)">45%</div></div>
+        <div class="ai-row"><div class="ai-lbl a">DAY</div><div class="ai-inf"><div class="ai-t">Safe Days · S03</div><div class="ai-s">Est. 1 day before quality loss</div></div><div class="ai-sc" style="color:var(--amber)">1d</div></div>
+        <div class="ai-row"><div class="ai-lbl t">EMC</div><div class="ai-inf"><div class="ai-t">EMC Window · All silos</div><div class="ai-s">14 silos in safe storage zone</div></div><div class="ai-sc" style="color:var(--teal2)">OK</div></div>
+      </div>
+      <div class="det-sec">
+        <div class="det-sec-lbl">Active Alerts</div>
+        <div class="alert-r crit"><div class="alert-ico" style="color:var(--red2)">⚠</div><div><div class="alert-t"><strong>S03</strong> — Temp 34.0°C top sensor, CO₂ 1,650 ppm. Immediate action required.</div><div class="alert-m">2 min ago · 15:42:18</div></div></div>
+        <div class="alert-r warn"><div class="alert-ico" style="color:var(--amber)">△</div><div><div class="alert-t"><strong>S07</strong> — CO₂ rising to 880 ppm. Fan S07 recommended.</div><div class="alert-m">15 min ago · 15:29:51</div></div></div>
+        <div class="alert-r warn"><div class="alert-ico" style="color:var(--amber)">△</div><div><div class="alert-t"><strong>S14</strong> — Top sensor 29.8°C trending up. Monitor closely.</div><div class="alert-m">28 min ago · 15:16:22</div></div></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="statusbar">
+  <div class="sb"><span class="sdot live"></span>Live</div>
+  <span class="sb-div"></span>
+  <div class="sb">20 sensors active</div>
+  <span class="sb-div"></span>
+  <div class="sb"><span class="sdot al"></span>3 alerts</div>
+  <span class="sb-div"></span>
+  <div class="sb">PLC: Mitsubishi FX5U · MQTT: Connected · Latency: 82ms</div>
+  <div class="sb-r" id="clockEl">--:--:--</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+/* ===== SILO DATA (each has 3 sensor temps: [bottom, middle, top]) ===== */
+const silos=[
+  {id:'S01',sensors:[26.8,27.2,27.5],co2:420, moist:14.2,status:'ok'},
+  {id:'S02',sensors:[28.2,28.7,29.0],co2:380, moist:13.8,status:'ok'},
+  {id:'S03',sensors:[32.2,33.5,34.0],co2:1650,moist:15.8,status:'crit'},
+  {id:'S04',sensors:[26.1,26.4,26.5],co2:410, moist:13.5,status:'ok'},
+  {id:'S05',sensors:[26.8,27.0,27.2],co2:395, moist:14.0,status:'ok'},
+  {id:'S06',sensors:[27.5,27.9,28.1],co2:445, moist:14.3,status:'ok'},
+  {id:'S07',sensors:[29.8,30.2,30.5],co2:880, moist:15.2,status:'warn'},
+  {id:'S08',sensors:[26.4,26.6,26.8],co2:360, moist:13.6,status:'ok'},
+  {id:'S09',sensors:[26.6,26.9,27.0],co2:400, moist:14.1,status:'ok'},
+  {id:'S10',sensors:[27.3,27.6,27.8],co2:420, moist:14.0,status:'ok'},
+  {id:'S11',sensors:[28.0,28.3,28.5],co2:470, moist:14.5,status:'ok'},
+  {id:'S12',sensors:[25.8,26.0,26.2],co2:350, moist:13.4,status:'ok'},
+  {id:'S13',sensors:[27.0,27.2,27.4],co2:390, moist:14.0,status:'ok'},
+  {id:'S14',sensors:[29.0,29.5,29.8],co2:720, moist:15.1,status:'warn'},
+  {id:'S15',sensors:[26.5,26.8,26.9],co2:380, moist:13.7,status:'ok'},
+  {id:'S16',sensors:[26.7,27.0,27.1],co2:395, moist:13.9,status:'ok'},
+  {id:'S17',sensors:[27.1,27.4,27.6],co2:410, moist:14.1,status:'ok'},
+  {id:'S18',sensors:[26.0,26.2,26.4],co2:355, moist:13.5,status:'ok'},
+  {id:'S19',sensors:[27.5,27.8,28.0],co2:440, moist:14.2,status:'ok'},
+  {id:'S20',sensors:[26.9,27.1,27.3],co2:385, moist:13.8,status:'ok'},
+];
+let selId='S03';
+
+/* ===== HELPERS ===== */
+function tempCol(t){
+  if(t<26) return'#0EA5E9';
+  if(t<28) return'#00BFA5';
+  if(t<30) return'#F59E0B';
+  if(t<32) return'#FB923C';
+  return'#EF4444';
+}
+function co2Col(v){return v>800?'#FC8181':v>500?'#F59E0B':'#6E8FA8'}
+
+/* ===== 3-ZONE SILO SVG ===== */
+function siloSVG(s){
+  const u=s.id;
+  const cx=35,rx=28,ry=8;
+  const bY=26,bH=78,bBot=bY+bH;
+  const [c1,c2,c3]=s.sensors.map(tempCol); // bot, mid, top
+  const bc=s.status==='crit'?'#EF4444':s.status==='warn'?'#F59E0B':'#00BFA5';
+  const bo=s.status==='ok'?.22:1;
+  /* zone boundaries inside body */
+  const z1Y=bBot-26, z2Y=bBot-52;
+
+  return`<svg viewBox="0 0 70 115" width="58" height="95" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="sh${u}" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#010810" stop-opacity=".92"/>
+    <stop offset="14%"  stop-color="#010810" stop-opacity=".28"/>
+    <stop offset="32%"  stop-color="white"   stop-opacity=".09"/>
+    <stop offset="54%"  stop-color="white"   stop-opacity=".02"/>
+    <stop offset="73%"  stop-color="#010810" stop-opacity=".16"/>
+    <stop offset="89%"  stop-color="#010810" stop-opacity=".60"/>
+    <stop offset="100%" stop-color="#010810" stop-opacity=".90"/>
+  </linearGradient>
+  <clipPath id="bc${u}"><rect x="${cx-rx}" y="${bY}" width="${rx*2}" height="${bH}"/></clipPath>
+</defs>
+
+<!-- ROOF CONE -->
+<polygon points="${cx},5 ${cx-rx+3},${bY} ${cx+rx-3},${bY}" fill="#060E1A" stroke="${bc}" stroke-width=".8" stroke-opacity="${bo*.85}"/>
+<polygon points="${cx},5 ${cx-rx+3},${bY} ${cx},${bY}" fill="#010810" fill-opacity=".5"/>
+
+<!-- BODY BACKGROUND -->
+<rect x="${cx-rx}" y="${bY}" width="${rx*2}" height="${bH}" fill="#06111E"/>
+
+<!-- ZONE 1: BOTTOM (sensor bot) -->
+<rect x="${cx-rx}" y="${z1Y}" width="${rx*2}" height="${bBot-z1Y}" fill="${c1}" fill-opacity=".52" clip-path="url(#bc${u})"/>
+<!-- ZONE 2: MIDDLE (sensor mid) -->
+<rect x="${cx-rx}" y="${z2Y}" width="${rx*2}" height="${z1Y-z2Y}" fill="${c2}" fill-opacity=".46" clip-path="url(#bc${u})"/>
+<!-- ZONE 3: TOP grain (sensor top) -->
+<rect x="${cx-rx}" y="${bY}" width="${rx*2}" height="${z2Y-bY}" fill="${c3}" fill-opacity=".38" clip-path="url(#bc${u})"/>
+
+<!-- ZONE DIVIDERS -->
+<line x1="${cx-rx+2}" y1="${z1Y}" x2="${cx+rx-2}" y2="${z1Y}" stroke="#010810" stroke-width="1.2" stroke-opacity=".55"/>
+<line x1="${cx-rx+2}" y1="${z2Y}" x2="${cx+rx-2}" y2="${z2Y}" stroke="#010810" stroke-width="1.2" stroke-opacity=".55"/>
+
+<!-- 3D CYLINDER SHADING -->
+<rect x="${cx-rx}" y="${bY}" width="${rx*2}" height="${bH}" fill="url(#sh${u})"/>
+
+<!-- SENSOR INDICATOR DOTS (right side) -->
+<circle cx="${cx+rx-5}" cy="${z1Y+13}" r="2.2" fill="${c1}" opacity=".85"/>
+<circle cx="${cx+rx-5}" cy="${z2Y+13}" r="2.2" fill="${c2}" opacity=".85"/>
+<circle cx="${cx+rx-5}" cy="${bY+(z2Y-bY)*.5}" r="2.2" fill="${c3}" opacity=".85"/>
+
+<!-- SIDE WALLS -->
+<line x1="${cx-rx}" y1="${bY}" x2="${cx-rx}" y2="${bBot}" stroke="${bc}" stroke-width="1.2" stroke-opacity="${bo}"/>
+<line x1="${cx+rx}" y1="${bY}" x2="${cx+rx}" y2="${bBot}" stroke="${bc}" stroke-width="1.2" stroke-opacity="${bo}"/>
+
+<!-- BOTTOM ELLIPSE (caps bottom) -->
+<ellipse cx="${cx}" cy="${bBot}" rx="${rx}" ry="${ry}" fill="#040A14" stroke="${bc}" stroke-width=".8" stroke-opacity="${bo*.45}"/>
+
+<!-- TOP CAP ELLIPSE -->
+<ellipse cx="${cx}" cy="${bY}" rx="${rx}" ry="${ry}" fill="#0C1E30" stroke="${bc}" stroke-width="1" stroke-opacity="${bo}"/>
+<ellipse cx="${cx-2}" cy="${bY-.5}" rx="${rx*.65}" ry="${ry*.5}" fill="white" fill-opacity=".05"/>
+</svg>`;
+}
+
+/* ===== RENDER SIDEBAR ===== */
+function renderSidebar(){
+  document.getElementById('siloList').innerHTML=silos.map(s=>`
+    <div class="sl-row ${s.id===selId?'on':''}" onclick="pick('${s.id}')">
+      <span class="sl-dot ${s.status}"></span>
+      <span class="sl-id">${s.id}</span>
+      <span class="sl-temp" style="color:${tempCol(s.sensors[2])}">${s.sensors[2].toFixed(1)}°</span>
+      <span class="sl-co2">${s.co2}</span>
+    </div>`).join('');
+}
+
+/* ===== RENDER GRID ===== */
+function renderGrid(){
+  document.getElementById('siloGrid').innerHTML=silos.map(s=>`
+    <div class="sc ${s.status} ${s.id===selId?'sel':''}" onclick="pick('${s.id}')">
+      <div class="sc-top">
+        <span class="sc-id ${s.status}">${s.id}</span>
+        ${s.status==='crit'?'<span class="sc-tag crit">⚠ CRIT</span>':s.status==='warn'?'<span class="sc-tag warn">△ WARN</span>':''}
+      </div>
+      <div class="sc-svg">${siloSVG(s)}</div>
+      <div class="sc-row">
+        <span class="sc-k">T</span>
+        <span class="sc-v" style="color:${tempCol(s.sensors[2])}">${s.sensors[2].toFixed(1)}°C</span>
+      </div>
+      <div class="sc-row">
+        <span class="sc-k">CO₂</span>
+        <span class="sc-v" style="color:${co2Col(s.co2)}">${s.co2}</span>
+      </div>
+    </div>`).join('');
+}
+
+/* ===== SELECTION ===== */
+function pick(id){
+  selId=id;
+  renderSidebar();renderGrid();updateDetail();
+}
+
+/* ===== DETAIL PANEL ===== */
+function updateDetail(){
+  const s=silos.find(x=>x.id===selId);if(!s)return;
+  document.getElementById('detId').textContent=s.id;
+  const topT=s.sensors[2];
+  const desc=s.status==='crit'?`CRITICAL — Temp ${topT.toFixed(1)}°C, CO₂ ${s.co2} ppm`
+    :s.status==='warn'?`WARNING — Temp ${topT.toFixed(1)}°C, CO₂ ${s.co2} ppm`
+    :`Normal — Temp ${topT.toFixed(1)}°C, CO₂ ${s.co2} ppm`;
+  document.getElementById('detDesc').textContent=desc;
+  document.getElementById('detDesc').style.color=s.status==='crit'?'#FC8181':s.status==='warn'?'#F59E0B':'#6E8FA8';
+
+  /* sensor chips */
+  const zones=['Bot','Mid','Top'];
+  document.getElementById('sensorChips').innerHTML=s.sensors.map((t,i)=>`
+    <div class="s-chip"><span class="s-pip" style="background:${tempCol(t)}"></span>${zones[i]}: ${t.toFixed(1)}°C</div>`).join('');
+
+  const dt=document.getElementById('dmT');
+  dt.textContent=topT.toFixed(1)+'°C';dt.style.color=tempCol(topT);
+  const dc=document.getElementById('dmC');
+  dc.textContent=s.co2.toLocaleString();dc.style.color=co2Col(s.co2);
+  const dm=document.getElementById('dmM');
+  dm.textContent=s.moist.toFixed(1)+'%';dm.style.color=s.moist>15?'#F59E0B':'#00BFA5';
+
+  if(chart){
+    const hists=s.sensors.map(t=>genHistory(t));
+    chart.data.datasets.forEach((ds,i)=>{ds.data=hists[i];});
+    chart.data.datasets[0].borderColor='#4B9DB5';
+    chart.data.datasets[1].borderColor='#00BFA5';
+    chart.data.datasets[2].borderColor=tempCol(s.sensors[2]);
+    chart.update('none');
+  }
+}
+
+/* ===== CHART ===== */
+let chart;
+function genHistory(base){
+  const a=[];let t=base-2.2;
+  for(let i=0;i<24;i++){t+=(Math.random()-.44)*.55;t=Math.max(22,Math.min(36,t));a.push(+t.toFixed(1));}
+  a[23]=base;return a;
+}
+function initChart(){
+  const s=silos.find(x=>x.id===selId);
+  const labels=Array.from({length:24},(_,i)=>`${String(i).padStart(2,'0')}:00`);
+  const ctx=document.getElementById('trendChart').getContext('2d');
+  chart=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels,
+      datasets:[
+        {label:'Bot sensor',data:genHistory(s.sensors[0]),borderColor:'#4B9DB5',borderWidth:1.3,fill:false,tension:.4,pointRadius:0,borderDash:[3,3]},
+        {label:'Mid sensor',data:genHistory(s.sensors[1]),borderColor:'#00BFA5',borderWidth:1.3,fill:false,tension:.4,pointRadius:0,borderDash:[3,3]},
+        {label:'Top sensor',data:genHistory(s.sensors[2]),borderColor:tempCol(s.sensors[2]),borderWidth:1.9,
+          fill:true,tension:.4,pointRadius:0,
+          backgroundColor:(ctx)=>{
+            const g=ctx.chart.ctx.createLinearGradient(0,0,0,120);
+            g.addColorStop(0,'rgba(0,191,165,.22)');g.addColorStop(1,'rgba(0,191,165,0)');return g;
+          }}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,
+        backgroundColor:'rgba(2,8,18,.97)',titleColor:'#00DFC8',bodyColor:'#6E8FA8',
+        borderColor:'rgba(0,191,165,.28)',borderWidth:1}},
+      scales:{
+        x:{ticks:{color:'#3A5C73',font:{size:8,family:'JetBrains Mono'},maxTicksLimit:8},
+           grid:{color:'rgba(0,191,165,.04)'},border:{color:'rgba(0,191,165,.12)'}},
+        y:{ticks:{color:'#3A5C73',font:{size:8,family:'JetBrains Mono'},callback:v=>v.toFixed(1)+'°'},
+           grid:{color:'rgba(0,191,165,.04)'},border:{color:'rgba(0,191,165,.12)'}}
+      }
+    }
+  });
+}
+
+/* ===== KPIs ===== */
+function updateKPIs(){
+  const ok=silos.filter(s=>s.status==='ok').length;
+  const al=silos.filter(s=>s.status!=='ok').length;
+  const tops=silos.map(s=>s.sensors[2]);
+  const avg=tops.reduce((a,b)=>a+b,0)/tops.length;
+  const co2avg=silos.reduce((a,b)=>a+b.co2,0)/silos.length;
+  document.getElementById('kN').textContent=ok+'/20';
+  document.getElementById('kA').textContent=al;
+  document.getElementById('kT').textContent=avg.toFixed(1)+'°C';
+  document.getElementById('kC').textContent=Math.round(co2avg);
+  document.getElementById('cntOk').textContent=ok;
+  document.getElementById('cntAl').textContent=al;
+}
+
+/* ===== SIMULATE ===== */
+function tick(){
+  silos.forEach(s=>{
+    if(s.status==='ok'){
+      s.sensors=s.sensors.map((t,i)=>
+        +Math.max(24,Math.min(32,t+(Math.random()-.5)*.25+(i*.05))).toFixed(1)
+      );
+      s.co2=Math.max(300,Math.min(750,s.co2+Math.round((Math.random()-.5)*16)));
+    }
+  });
+  renderGrid();renderSidebar();updateKPIs();updateDetail();
+}
+
+function clock(){document.getElementById('clockEl').textContent=new Date().toTimeString().slice(0,8);}
+
+renderSidebar();renderGrid();initChart();updateKPIs();clock();
+setInterval(clock,1000);
+setInterval(tick,3000);
+</script>
+</body>
+</html>
