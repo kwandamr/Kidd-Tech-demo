@@ -248,7 +248,6 @@ function renderCurrentPage(pageId) {
     case 'quality':    if (typeof renderQuality === 'function') renderQuality(); break;
     case 'report':     if (typeof renderReport === 'function') renderReport(); break;
     case 'fumigation': if (typeof renderFumigation === 'function') renderFumigation(); break;
-    case 'planner':    if (typeof renderPlanner === 'function') renderPlanner(); break;
     case 'predict':    if (typeof PREDICT !== 'undefined') PREDICT.renderPredictPage(); break;
     case 'analytics':  if (typeof renderAnalytics === 'function') renderAnalytics(); break;
   }

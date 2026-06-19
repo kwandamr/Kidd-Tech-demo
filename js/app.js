@@ -95,7 +95,6 @@ window.addEventListener('resize', () => {
   clearTimeout(_resizeTimer);
   _resizeTimer = setTimeout(() => {
     if (_activePage === 'dashboard' && typeof _syncDashboardTop === 'function') _syncDashboardTop();
-    if (_activePage === 'planner'   && typeof renderGantt === 'function') renderGantt();
   }, 200);
 });
 

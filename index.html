@@ -34,8 +34,7 @@
   <button class="nav-btn"        id="nb-quality"     onclick="showPage('quality',this)"     data-i18n="nav.quality">🌿 Grain Quality</button>
   <button class="nav-btn"        id="nb-report"      onclick="showPage('report',this)"      data-i18n="nav.report">📊 Reports &amp; Energy</button>
   <button class="nav-btn"        id="nb-fumigation"  onclick="showPage('fumigation',this)"  data-i18n="nav.fumigation">🧪 Fumigation</button>
-  <button class="nav-btn"        id="nb-planner"     onclick="showPage('planner',this)"     data-i18n="nav.planner">📋 Planning Board</button>
-  <button class="nav-btn"        id="nb-predict"     onclick="showPage('predict',this)">🔮 Predictive</button>
+<button class="nav-btn"        id="nb-predict"     onclick="showPage('predict',this)">🔮 Predictive</button>
   <button class="nav-btn"        id="nb-analytics"   onclick="showPage('analytics',this)">📈 Analytics</button>
 
   <div class="nav-right">
@@ -373,118 +372,6 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     PAGE: PLANNING BOARD
-═══════════════════════════════════════════════════ -->
-<div class="page" id="page-planner">
-
-  <!-- Header -->
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-    <div>
-      <div class="section-title" style="margin-bottom:4px" data-i18n="plan.title">📋 Planning Board</div>
-      <div style="font-size:12px;color:var(--text2)" data-i18n="plan.sub">จัดการงานถ่ายวนถัง · FIFO/LIFO · วางแผนการใช้ถัง</div>
-    </div>
-    <button class="jb-new-btn" onclick="openJobModal()" data-i18n="plan.newJob">➕ สร้าง Job ถ่ายวนถัง</button>
-  </div>
-
-  <!-- Stats strip -->
-  <div class="plan-stats-strip">
-    <div class="plan-stat" style="border-left:3px solid var(--blue)">
-      <div class="ps-val" id="ps-inprog" style="color:var(--blue)">0</div>
-      <div class="ps-lbl" data-i18n="plan.inprog">⚙ กำลังดำเนินการ</div>
-    </div>
-    <div class="plan-stat" style="border-left:3px solid var(--yellow)">
-      <div class="ps-val" id="ps-sched" style="color:var(--yellow)">0</div>
-      <div class="ps-lbl" data-i18n="plan.sched">📅 รอดำเนินการ</div>
-    </div>
-    <div class="plan-stat" style="border-left:3px solid var(--green)">
-      <div class="ps-val" id="ps-done" style="color:var(--green)">0</div>
-      <div class="ps-lbl" data-i18n="plan.done">✅ เสร็จสิ้นวันนี้</div>
-    </div>
-    <div class="plan-stat" style="border-left:3px solid var(--border)">
-      <div class="ps-val" id="ps-total">0</div>
-      <div class="ps-lbl" data-i18n="plan.all">📋 Job ทั้งหมด</div>
-    </div>
-  </div>
-
-  <!-- Gantt chart -->
-  <div class="plan-card" style="margin-bottom:16px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-      <h3 style="margin-bottom:0" data-i18n="plan.ganttTitle"><span>📊</span> Gantt Schedule — ตารางงานวันนี้</h3>
-      <div style="display:flex;gap:8px;align-items:center">
-        <span id="gantt-date-label" style="font-size:11px;color:var(--text3)"></span>
-        <button class="jb-filter-btn active" onclick="renderGantt()" style="padding:3px 10px;font-size:11px">🔄</button>
-      </div>
-    </div>
-    <div class="gantt-outer">
-      <div class="gantt-flex" id="gantt-flex">
-        <div class="gantt-label-col" id="gantt-label-col"></div>
-        <div class="gantt-timeline-wrap">
-          <div class="gantt-time-header" id="gantt-time-hdr"></div>
-          <div id="gantt-rows"></div>
-        </div>
-      </div>
-    </div>
-    <!-- Gantt legend -->
-    <div style="display:flex;gap:18px;margin-top:10px;flex-wrap:wrap;align-items:center">
-      <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2)"><span style="width:18px;height:8px;border-radius:3px;background:linear-gradient(90deg,#0284C7,#38BDF8);display:inline-block"></span>กำลังดำเนินการ</span>
-      <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2)"><span style="width:18px;height:8px;border-radius:3px;background:linear-gradient(90deg,#047857,#00BFA5);display:inline-block"></span>รอดำเนินการ</span>
-      <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2)"><span style="width:2px;height:14px;background:var(--red);display:inline-block"></span>ตอนนี้</span>
-      <span style="font-size:11px;color:var(--text3);margin-left:auto">💡 ลากแถบสีเพื่อปรับเวลา · ลาก Job card เพื่อเรียงลำดับ</span>
-    </div>
-  </div>
-
-  <!-- Main columns: FIFO/Recs | Job Board -->
-  <div class="plan-top-cols">
-    <!-- LEFT: FIFO + Recommendations -->
-    <div>
-      <div class="plan-card">
-        <h3 data-i18n="plan.fifoTitle"><span>📦</span> FIFO / LIFO — ลำดับการนำออก</h3>
-        <div style="display:flex;gap:8px;margin-bottom:12px">
-          <button class="filter-btn active" id="pm-fifo" onclick="setPlanMode('fifo',this)" style="font-size:11px;padding:4px 12px">FIFO (เก่าออกก่อน)</button>
-          <button class="filter-btn"        id="pm-lifo" onclick="setPlanMode('lifo',this)" style="font-size:11px;padding:4px 12px">LIFO (ใหม่ออกก่อน)</button>
-        </div>
-        <div id="fifo-list"></div>
-        <button class="plan-action-btn outline" style="margin-top:10px" onclick="showToast('📥 Export FIFO plan — Phase 2')" data-i18n="plan.exportPlan">📥 Export Plan</button>
-      </div>
-      <div class="plan-card">
-        <h3 data-i18n="plan.recsTitle"><span>💡</span> AI Recommendations</h3>
-        <div id="plan-recs"></div>
-      </div>
-    </div>
-
-    <!-- RIGHT: Job Board -->
-    <div>
-      <div class="plan-card" style="margin-bottom:0;height:100%">
-        <div class="jb-header">
-          <h3 style="margin-bottom:0" data-i18n="plan.jobBoard"><span>🚛</span> Job Board</h3>
-          <button class="jb-new-btn" onclick="openJobModal()">➕ ใหม่</button>
-        </div>
-        <div class="jb-filters">
-          <button class="jb-filter-btn active" onclick="setJobFilter('active',this)">🔄 กำลังทำ/รอ</button>
-          <button class="jb-filter-btn"        onclick="setJobFilter('inprogress',this)">⚙ In Progress</button>
-          <button class="jb-filter-btn"        onclick="setJobFilter('scheduled',this)">📅 Scheduled</button>
-          <button class="jb-filter-btn"        onclick="setJobFilter('complete',this)">✅ เสร็จ</button>
-          <button class="jb-filter-btn"        onclick="setJobFilter('all',this)">All</button>
-        </div>
-        <div id="job-board-list"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PLC Interlock Status Panel -->
-  <div class="plan-card" style="margin-top:16px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;cursor:pointer" onclick="togglePLCPanel()">
-      <h3 style="margin-bottom:0" data-i18n="plan.plcTitle"><span>🖥</span> PLC Interlock Status</h3>
-      <div style="display:flex;align-items:center;gap:12px">
-        <span id="plc-master-status" style="font-size:11px;font-weight:600"></span>
-        <span style="color:var(--text3);font-size:12px">▼</span>
-      </div>
-    </div>
-    <div id="plc-panel-body"></div>
-  </div>
-
-</div><!-- end page-planner -->
 
 <!-- ═══════════════════════════════════════════════════
      PAGE: PREDICTIVE INTELLIGENCE
@@ -719,7 +606,6 @@
 <!-- ═══════════════════════════════════════════════════
      SHARED: TOOLTIP + TOAST
 ═══════════════════════════════════════════════════ -->
-<div class="gantt-tooltip" id="gantt-tooltip"></div>
 <div class="toast" id="toast"></div>
 
 <!-- ═══════════════════════════════════════════════════
@@ -739,10 +625,6 @@
 <script src="js/silos.js"></script>
 <script src="js/fumigation.js"></script>
 <script src="js/reports.js"></script>
-<script src="js/jobs.js"></script>
-<script src="js/gantt.js"></script>
-<script src="js/plc.js"></script>
-<script src="js/planning.js"></script>
 <!-- 7. Predictive Intelligence (ต้องการ config, data, db) -->
 <script src="js/predict.js"></script>
 <!-- 8. Analytics — Historical Data Dashboard -->
